@@ -10,10 +10,9 @@ code=d3c.read()
 d3c.close()
 ln=1
 for line in code.splitlines():
-	for line in page.splitlines():
-		if "." in line:
-			av=line
-			break
+	if "." in line:
+		av=line.replace("	<p>Version:<br>","").replace("</p>","")
+		break
 vl="https://raw.githubusercontent.com/BlackFireFox/d3c/master/version.html"
 print "Connecting..."
 try:

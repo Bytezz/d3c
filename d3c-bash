@@ -1,0 +1,62 @@
+#!/bin/bash
+p() {
+	if [[ $2 == "0" ]]; then
+		p=0
+	else
+		p=""
+	fi
+	l=$(echo $1 | grep -o .)
+	for x in $l; do
+		r=$(printf '%d' "'$x")
+		if [[ $2 == "0" ]]; then
+			p=$((10#$p+10#$r))
+		else
+			p+=$(printf "%s" "$r")
+		fi
+	done
+	p=${p#0}
+	echo $p
+}
+chr() {
+	l=$(echo $1 | tr ";" "\n")
+	p=$(p $pw $ty)
+	for x in $l; do
+		x=$((10#$x-10#$p))
+		r=$(printf \\$(printf '%03o' $x))
+		printf "%s" "$r"
+	done
+	printf "\n"
+}
+ord() {
+	l=$(echo $1 | grep -o .)
+	p=$(p $pw $ty)
+	for x in $l; do
+		r=$(printf '%d' "'$x")
+		r=$((10#$r+10#$p))
+		printf "%s;" "$r"
+	done
+	printf "\n"
+}
+ed=$1
+text=$2
+if [[ $text == "-_-"* ]]; then
+	text=${text:3}
+else
+	if [[ $text != *";"* ]]; then
+		if [ -f $text ]; then
+			text=$(more $text)
+		else
+			echo "'$text' file not found."
+			exit
+		fi
+	fi
+fi
+pw=$3
+ty=$4
+if [[ $ed == "e" ]]; then
+	ord $text
+elif [[ $ed == "d" ]]; then
+	chr $text
+else
+	printf "Usage:\nd3c [e/d] [-_-text/file] [password] [type(0/1)]\n"
+fi

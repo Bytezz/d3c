@@ -1,6 +1,6 @@
 # **D3C**
 D3C encryption algorithm
-<sub>LICENSE</sub>
+<sub>[GPL3](LICENSE)</sub>
 ***
 ## What is **D3C**?
 D3C is an encryption algorithm very strong,

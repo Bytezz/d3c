@@ -1,6 +1,6 @@
 # **D3C**
 D3C algoritmo di crittografia
-<sub>LICENSA</sub>
+<sub>[GPL3](LICENSE)</sub>
 ***
 ## Cos'è **D3C**?
 D3C è un algoritmo di crittografia molto forte,

@@ -19,10 +19,6 @@ function d3c(text,pw,ty) {
 	}
 	text=l;
 	return text;
-	var test=0;
-	test+=pw[0].charCodeAt(0);
-	test+=pw[1].charCodeAt(0);
-	return test;
 }
 function dd3c(text,pw,ty) {
 	if (ty=="1"){
@@ -41,7 +37,9 @@ function dd3c(text,pw,ty) {
 	var l="";
 	var i=0;
 	while (i<text.length){
-		l+=String.fromCharCode(parseInt(text[i])-parseInt(p));
+		if (text[i]!=""){
+			l+=String.fromCharCode(parseInt(text[i])-parseInt(p));
+		}
 		i++;
 	}
 	text=l;

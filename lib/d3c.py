@@ -22,6 +22,8 @@ def de(text,pw,ty):
 	pw=int(p)
 	l=[]
 	text=text.split(";")
+	if text[-1]=="":
+		text.pop(-1)
 	for a in text:
 		l.append(chr(int(a)-pw))
 	text="".join(l)

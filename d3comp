@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+import os,sys,d3c
+def help():
+	return "  Usage:\n"+sys.argv[0]+" c '123;456;789;' [compression level(1/9)]\n  to compress and\n"+sys.argv[0]+" u '123;456;789;' [compression level(1/9)]\n  to uncompress"
+def gcl(): # get compression level
+	if ";" in sys.argv[1]:
+		if len(sys.argv)>2:
+			l=sys.argv[2]
+			if l>9:
+				l=9
+			if l<1:
+				l=1
+			return l+1
+		else:
+			return 2
+	elif sys.argv[1]=="c" or sys.argv[1]=="u":
+		if len(sys.argv)>3:
+			l=sys.argv[3]
+			if l>9:
+				l=9
+			if l<1:
+				l=1
+			return l+1
+		else:
+			return 2
+	else:
+		return 2
+n=""
+try:
+	cl=gcl()
+	if sys.argv[1]=="c" or ";" in sys.argv[1]:
+		if sys.argv[1]=="c":
+			s=sys.argv[2]
+		else:
+			s=sys.argv[1]
+		for c in s.split(";"):
+			if c!="":
+				n+=str(int(c)/cl)+";"
+	elif sys.argv[1]=="u":
+		for c in sys.argv[2].split(";"):
+			if c!="":
+				n+=str(int(float(c)*cl))+";"
+	else:
+		n=help()
+	print n
+except Exception as e:
+	if str(e)=="list index out of range":
+		print help()
+	else:
+		print e

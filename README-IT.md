@@ -9,7 +9,7 @@ bisognerebbe già sapere cosa uscirebbe ed ogni tentativo andrebbe ripetuto
 perché D3C usa doppia sicurezza, la prima in ascii e la seconda in binario,
 inoltre ad un occhio poco esperto appare come un plain-text.
 ## Come installarlo
-* Download:<br>`git clone https://github.com/BlackFireFox/d3c`
+* Download:<br>`git clone https://github.com/Bytezz/d3c`
 * Install lib for Python:<br>`sudo python installP.py`
 * Install lib for C:<br>`lavoro in corso...`
 * Install lib for Ruby:<br>`sudo ruby installR.rb`

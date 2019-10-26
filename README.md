@@ -9,7 +9,7 @@ should already know what will come out and any attempt should be repeated
 because it use double security, the first in ascii and the second in binary,
 furthermore to an not very experienced eye appears as a plain-text.
 ## How to install
-* Download:<br>`git clone https://github.com/BlackFireFox/d3c`
+* Download:<br>`git clone https://github.com/Bytezz/d3c`
 * Install lib for Python:<br>`sudo python installP.py`
 * Install lib for C:<br>`work in progress...`
 * Install lib for Ruby:<br>`sudo ruby installR.rb`

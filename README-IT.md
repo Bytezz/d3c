@@ -42,5 +42,5 @@ inoltre ad un occhio poco esperto appare come un plain-text.
 * Use lib for JS:<br>test.html
 * Use tool for Linux:<br>`d3c --help`
 ***
-[SVILUPPATORE](https://github.com/BlackFireFox)<br>
+[SVILUPPATORE](https://github.com/bytezz)<br>
 [LICENSA](LICENSE)

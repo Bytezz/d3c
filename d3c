@@ -61,6 +61,6 @@ try:
 		print c
 except:
 	if e==0:
-		print "Usage:\nd3c [e/d] [-_-text/file] [password] [type(0/1)] [where save output(optional)]"
+		print "Usage:\nd3c [e/d] [-_-text/file] [password] [type(0/1)] [where save output(optional)]\n\tInsert -? as password\n\tto get asked later"
 	elif e==1:
 		print "Invalid password"

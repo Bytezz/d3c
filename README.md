@@ -15,7 +15,8 @@ furthermore to an not very experienced eye appears as a plain-text.
 * Install lib for Ruby:<br>`sudo ruby installR.rb`
 * Install lib for Perl:<br>`sudo perl installPe.pl`
 * Install all on Linux:<br>`sudo make install`
-* Install tool for Linux:<br>`sudo ./installTL.sh`
+* Install tool for Linux:<br>`sudo bash installTL.sh`
+* Install text editor for Linux:<br>`sudo bash installTE.sh`
 * Install all lib on Windows:<br>`instAllW.bat`
 ## How to reinstall
 * Reinstall lib for Python:<br>`sudo python installP.py`
@@ -23,7 +24,8 @@ furthermore to an not very experienced eye appears as a plain-text.
 * Reinstall lib for Ruby:<br>`sudo ruby installR.rb`
 * Reinstall lib for Perl:<br>`sudo però installPe.pl`
 * Reinstall all on Linux:<br>`sudo make reinstall`
-* Reinstall tool for Linux:<br>`sudo ./installTL.sh -r`
+* Reinstall tool for Linux:<br>`sudo bash installTL.sh -r`
+* Reinstall text editor for Linunx:<br>`sudo bash installTE.sh -r`
 * Reinstall all lib on Windows:<br>`instAllW.bat`
 ## How to uninstall
 * Uninstall lib for Python:<br>`sudo python installP.py -u`
@@ -31,7 +33,8 @@ furthermore to an not very experienced eye appears as a plain-text.
 * Uninstall lib for Ruby:<br>`sudo ruby installR.rb -u`
 * Uninstall lib for Perl:<br>`sudo perl installPe.pl -u`
 * Uninstall all on Linux:<br>`sudo make uninstall`
-* Uninstall tool for Linux:<br>`sudo ./installTL.sh -u`
+* Uninstall tool for Linux:<br>`sudo bash installTL.sh -u`
+* Uninstall text editor for Linux:<br>`sudo bash installTE.sh -u`
 * Uninstall all lib on Windows:<br>`instAllW.bat -u`
 ## How to use
 * Use lib for Python:<br>test.py

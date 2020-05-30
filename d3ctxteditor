@@ -5,7 +5,7 @@ try:
 except:
 	import Tkinter as tk
 import tkFileDialog
-def en(text,pw,ty):
+def en(text,pw,ty): # d3c encrypt function
 	ty=str(ty)
 	if ty!="0" and ty!="1":
 		ty="0"
@@ -18,7 +18,7 @@ def en(text,pw,ty):
 		l.append(str(ord(a)+pw))
 	text=";".join(l)
 	return text
-def de(text,pw,ty):
+def de(text,pw,ty): # d3c decrypt function
 	ty=str(ty)
 	if ty!="0" and ty!="1":
 		ty="0"
@@ -34,32 +34,34 @@ def de(text,pw,ty):
 		l.append(chr(int(a)-pw))
 	text="".join(l)
 	return text
-def ch():
+def ch(e=""): # function to change file to edit
 	global f
 	global fc
 	global filename
-	f=tkFileDialog.askopenfilename()
-	filename=f.split("/")[-1]
-	op=open(f,"r")
-	fc=op.read()
-	op.close()
-	fn["text"]=filename
-	relf()
-def relf():
+	nf=tkFileDialog.askopenfilename()
+	if nf!=() and nf!="": # if have selected one file
+		f=nf
+		filename=f.split("/")[-1]
+		op=open(f,"r")
+		fc=op.read()
+		op.close()
+		fn["text"]=filename
+		relf()
+def relf(e=""): # function to refresh textarea with file content
 	global txtt
 	op=open(f,"r")
 	content=op.read()
 	op.close()
 	txtt.delete("1.0",tk.END)
 	txtt.insert(tk.INSERT,content)
-	status["text"]=""
-def savef():
+	status["text"]="Loaded '"+f+"'"
+def savef(e=""): # function to save the file
 	global txtt
 	op=open(f,"w")
 	op.write(txtt.get("1.0",'end-1c'))
 	op.close()
 	status["text"]="Saved as '"+f+"'"
-def ed(e):
+def ed(e): # function to start encrypting/decrypting
 	global ende
 	global tipo
 	global txtt
@@ -82,56 +84,91 @@ def ed(e):
 				status["text"]="Invalid password."
 			else:
 				status["text"]="Error: "+str(e)
-global w0
+def selectall(e): # function to select all text
+	try: # if it's a Text widget
+		e.widget.tag_add(tk.SEL,"1.0",tk.END)
+		e.widget.mark_set(tk.INSERT,tk.END)
+		e.widget.see(tk.INSERT)
+	except: # if it's a Entry widget
+		e.widget.select_range(0,"end")
+		e.widget.icursor("end")
+	return "break"
+bgcolor="#222"
+bg2color="#444"
+hgcolor="#888"
+hfcolor="#fff"
+fgcolor="#fff"
+racolor="#777"
+global w # window
 w=tk.Tk()
-global f
+global f # file whit path
 f=tkFileDialog.askopenfilename()
-global filename
+if f==() or f=="": # if no file selected
+	f=os.path.expanduser("~")+"/NewBlankFile.txt"
+	i=0
+	while os.path.isfile(f):
+		f=os.path.expanduser("~")+"/NewBlankFile"+str(i)+".txt"
+		i+=1
+	open(f,"a").close() # make NewBlankFile.txt file in home directory
+global filename # only name of file
 filename=f.split("/")[-1]
 fo=open(f,"r")
-global fc
+global fc # file content
 fc=fo.read()
 fo.close()
 w.title(filename+" - D3cTXTEditor")
-head=tk.Frame(w)
+try:
+	w.iconbitmap("@d3c.xbm")
+except:
+	w.iconbitmap("@/usr/local/share/d3c/d3c.xbm")
+w.configure(bg=bgcolor)
+head=tk.Frame(w,bg=bgcolor)
 head.pack()
-fn=tk.Button(head,text=filename,command=ch)
+fn=tk.Button(head,text=filename,command=ch,bd=0,highlightthickness=.5,bg=bg2color,fg=fgcolor,activebackground=hgcolor,activeforeground=hfcolor,highlightbackground=bgcolor,highlightcolor=hgcolor)
 fn.pack(side=tk.LEFT)
-pt=tk.Label(head,text="Password (press <ENTER>):")
+pt=tk.Label(head,text="Password (press <ENTER>):",bg=bgcolor,fg=fgcolor)
 pt.pack(side=tk.LEFT)
-global pi
-pi=tk.Entry(head,bd=0.5,show="*")
+global pi # password input
+pi=tk.Entry(head,bd=0,show="*",highlightthickness=.5,bg=bg2color,fg=fgcolor,insertbackground=fgcolor,highlightbackground=bg2color,highlightcolor=hgcolor)
 pi.pack(side=tk.LEFT)
 pi.focus_set()
-head2=tk.Frame(w)
+head2=tk.Frame(w,bg=bgcolor)
 head2.pack()
-head2l=tk.Frame(head2)
+head2l=tk.Frame(head2,bg=bgcolor)
 head2l.pack(side=tk.LEFT)
-head2c=tk.Frame(head2)
+head2c=tk.Frame(head2,bg=bgcolor)
 head2c.pack(side=tk.LEFT)
-head2r=tk.Frame(head2)
+head2r=tk.Frame(head2,bg=bgcolor)
 head2r.pack(side=tk.LEFT)
-global ende
+global ende # select if want to decrypt or encrypt
 ende=tk.IntVar()
-ed1=tk.Radiobutton(head2c,text="Encrypt",variable=ende,value=10)
-ed2=tk.Radiobutton(head2c,text="Decrypt",variable=ende,value=11)
+ed1=tk.Radiobutton(head2c,text="Encrypt",variable=ende,value=10,bd=0,highlightthickness=.5,highlightbackground=bgcolor,highlightcolor=hgcolor,activebackground=hgcolor,activeforeground=hfcolor,selectcolor=racolor,bg=bgcolor,fg=fgcolor)
+ed2=tk.Radiobutton(head2c,text="Decrypt",variable=ende,value=11,bd=0,highlightthickness=.5,highlightbackground=bgcolor,highlightcolor=hgcolor,activebackground=hgcolor,activeforeground=hfcolor,selectcolor=racolor,bg=bgcolor,fg=fgcolor)
 ed1.pack()
 ed2.pack()
-global tipo
+ed1.select()
+global tipo # type of encryption/decryption
 tipo=tk.IntVar()
-tp1=tk.Radiobutton(head2r,text="Short",variable=tipo,value=0)
-tp2=tk.Radiobutton(head2r,text="Long",variable=tipo,value=1)
+tp1=tk.Radiobutton(head2r,text="Short",variable=tipo,value=0,bd=0,highlightthickness=.5,highlightbackground=bgcolor,highlightcolor=hgcolor,activebackground=hgcolor,activeforeground=hfcolor,selectcolor=racolor,bg=bgcolor,fg=fgcolor)
+tp2=tk.Radiobutton(head2r,text="Long",variable=tipo,value=1,bd=0,highlightthickness=.5,highlightbackground=bgcolor,highlightcolor=hgcolor,activebackground=hgcolor,activeforeground=hfcolor,selectcolor=racolor,bg=bgcolor,fg=fgcolor)
 tp1.pack()
 tp2.pack()
-global txtt
-txtt=tk.Text(w)
+tp1.select()
+global txtt # textarea where put file content
+txtt=tk.Text(w,bd=0,highlightthickness=0,bg=bg2color,fg=fgcolor,insertbackground=fgcolor,padx=3,pady=3)
 txtt.insert(tk.INSERT,fc)
 txtt.pack()
-status=tk.Label(w,text="")
+status=tk.Label(w,text="",bg=bgcolor,fg=fgcolor) # status bar on bottom
 status.pack(side=tk.BOTTOM)
-rf=tk.Button(head2l,text="Reload file",command=relf)
+rf=tk.Button(head2l,text="Reload file",command=relf,bd=0,highlightthickness=.5,bg=bg2color,fg=fgcolor,activebackground=hgcolor,activeforeground=hfcolor,highlightbackground=bgcolor,highlightcolor=hgcolor) # button to refresh textarea with file content
 rf.pack(side=tk.LEFT)
-sf=tk.Button(head2l,text="Save file",command=savef)
+sf=tk.Button(head2l,text="Save file",command=savef,bd=0,highlightthickness=.5,bg=bg2color,fg=fgcolor,activebackground=hgcolor,activeforeground=hfcolor,highlightbackground=bgcolor,highlightcolor=hgcolor) # button to save file content
 sf.pack(side=tk.LEFT)
-pi.bind("<Return>",ed)
+w.bind("<Control-s>",savef)
+w.bind("<Control-r>",relf)
+w.bind("<Control-o>",ch)
+#w.bind("<Control-q",quit)
+pi.bind("<Return>",ed) # encrypt/decrypt on <ENTER> press
+pi.bind("<Control-a>",selectall)
+txtt.bind("<Control-a>",selectall)
 w.mainloop()

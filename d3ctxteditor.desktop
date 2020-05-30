@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=D3CTXTEditor
+Comment=Text Editor with D3C integrated
+Exec=d3ctxteditor
+Type=Application
+Icon=/usr/local/share/d3c/d3c.png
+Terminal=false
+MimeType=text/plain
+Categories=GTK;Utility;TextEditor;
+Keywords=text;editor;

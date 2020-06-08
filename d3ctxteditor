@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os,sys
+import os,sys,tempfile
 try:
 	import tkinter as tk
 except:
@@ -102,12 +102,17 @@ racolor="#777"
 global w # window
 w=tk.Tk()
 global f # file whit path
-f=tkFileDialog.askopenfilename()
+f=""
+if len(sys.argv)>1:
+	if sys.argv[1]!="":
+		f=sys.argv[1]
+if f=="":
+	f=tkFileDialog.askopenfilename()
 if f==() or f=="": # if no file selected
-	f=os.path.expanduser("~")+"/NewBlankFile.txt"
+	f=tempfile.gettempdir()+"/NewBlankFile.txt"
 	i=0
 	while os.path.isfile(f):
-		f=os.path.expanduser("~")+"/NewBlankFile"+str(i)+".txt"
+		f=tempfile.gettempdir()+"/NewBlankFile"+str(i)+".txt"
 		i+=1
 	open(f,"a").close() # make NewBlankFile.txt file in home directory
 global filename # only name of file
